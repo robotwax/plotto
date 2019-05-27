@@ -228,7 +228,6 @@ def route_login():
     # Here we just store the given username in a cookie.
     # Actual session cookies should be signed or use a JWT token.
     rep = flask.redirect(_app_route)
-    rep.set_cookie('custom-auth-session', '', expires=0)
     return rep
 
 # create a logout route
@@ -277,6 +276,18 @@ login_form = html.Div([
         dcc.Input(id='pw', placeholder='password', name='password', type='password', style={'margin-left': 25}),
         html.Button('Login', type='submit',  style={'margin-left': 25})
     ], action='/custom-auth/login', method='post')
+])
+
+
+result_history = html.Div([
+    html.Hr(),
+    html.Br(),
+    html.Div([
+        html.H3('Result History and Statistics', className="eleven columns offset-by-one"), 
+    ], className = "row"),
+    html.Div([
+        html.Div(id='table-container', className= "five columns offset-by-one", style={'margin-top': 20}),
+    ], className='row'),
 ])
 
 def changeImageSize(maxWidth, 
@@ -440,7 +451,7 @@ app.layout = html.Div([
         html.H3('Stochastic Predict', className="eleven columns offset-by-one"), 
     ], className = "row"),
     html.Div([
-        html.P('This function attempts to predict the range of numbers that the next draw will appear in, using Machine Learning methods. This section is still under development', className="ten columns offset-by-one"),
+        html.P('This function uses Machine Learning methods to predict the range of numbers that the next draw will appear in. This section is still under development.', className="ten columns offset-by-one"),
     ], className = "row"),
     html.Br(),
     html.Div([              
@@ -451,14 +462,6 @@ app.layout = html.Div([
     html.Div([
     html.Button(id='submit-button3', n_clicks=0, children='Predict', className="two columns offset-by-eight"),
     ], className="row"),
-    html.Hr(),
-    html.Br(),
-    html.Div([
-        html.H3('Result History and Statistics', className="eleven columns offset-by-one"), 
-    ], className = "row"),
-    html.Div([
-        html.Div(id='table-container', className= "five columns offset-by-one", style={'margin-top': 20}),
-    ], className='row'),
     html.Div(id='intermediate-delog', style={'display': 'none'}),
     html.Div(id='intermediate-delog2', style={'display': 'none'}),
     dcc.ConfirmDialog(
@@ -1840,6 +1843,15 @@ def update_output(intermed1):
     clean = clean.replace(']', '')
     return clean
 
+@app.callback(Output('confirm', 'displayed'),
+              [Input('intermediate-delog', 'id')])
+def user_account2(intermediatedelog):
+    x = time.sleep(129621)
+    while x == False:
+        return False
+    else:
+        kml = imagerem()
+        return True
 
 if __name__ == '__main__':
     app.run_server(debug=True)
