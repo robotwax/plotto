@@ -445,7 +445,7 @@ app.layout = html.Div([
     html.Br(),
     html.Div([
         html.Div(
-        dcc.Graph(id='lotto5', style={'height': '70vh'}, className="ten columns offset-by-one")),
+        dcc.Graph(id='lotto5', style={'height': '60vh'}, className="ten columns offset-by-one")),
     ], className='row'),
     html.Div([
         html.H3('Stochastic Predict', className="eleven columns offset-by-one"), 
@@ -518,7 +518,7 @@ def update_graph(value):
         j = bk3[-1]
         newlist1 = []
         bx = []
-        for x in range(i, j):
+        for x in range(i, j+1):
             bx.append(x)
         bz = []
         i = 0
@@ -1342,59 +1342,56 @@ def update_output(nclicks, interball):
         cage = (mist[34:])
         cage2 = [val for sublist in cage for val in sublist]
         balls = []
-        for i in range(0, 6):
-            ball = cage2[i::6]
+        for i in range(0, 8):
+            ball = cage2[i::7]
             balls.append(ball)
-        ball =  balls[0]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball1 = ball[k]
+        print(balls)
+        ball =  balls[5]
+        k = random.randint(0, 6)
+        ball1=ball[k]
+        print(ball1)
         out = []
         out.append(ball1)
-        
-        ball =  balls[1]
-        ball = [y for y in ball if y != ball1]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball2 = ball[k]
-        out.append(ball2)
-        
-        ball =  balls[2]
-        jc = [y for y in ball if y != ball1]
-        ball = [y for y in jc if y != ball2]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball3 = ball[k]
-        out.append(ball3)
-
-        ball =  balls[3]
-        jc = [y for y in ball if y != ball1]
-        jd = [y for y in jc if y != ball2]
-        ball = [y for y in jd if y != ball3]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball4 = ball[k]
-        out.append(ball4)
-        
+    
         ball =  balls[4]
-        jc = [y for y in ball if y != ball1]
-        jd = [y for y in jc if y != ball2]
-        je = [y for y in jd if y != ball3]
-        ball = [y for y in je if y != ball4]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball5 = ball[k]
+        ball = [m for m in ball if m != ball1]
+        k = random.randint(0, 6)
+        ball2=ball[k]
+        print(ball2)
+        out.append(ball2)
+    
+        ball =  balls[3]
+        jc = [m for m in ball if m != ball1]
+        ball = [m for m in jc if m != ball2]
+        k = random.randint(0, 6)
+        ball3=ball[k]
+        out.append(ball3)
+    
+        ball =  balls[2]
+        jc = [m for m in ball if m != ball1]
+        jd = [m for m in jc if m != ball2]
+        ball = [m for m in jd if m != ball3]
+        k = random.randint(0, 6)
+        ball4=ball[k]
+        out.append(ball4)
+    
+        ball =  balls[1]
+        jc = [m for m in ball if m != ball1]
+        jd = [m for m in jc if m != ball2]
+        je = [m for m in jd if m != ball3]
+        ball = [m for m in je if m != ball4]
+        k = random.randint(0, 6)
+        ball5=ball[k]
         out.append(ball5)
-        
-        ball =  balls[5]
-        jc = [y for y in ball if y != ball1]
-        jd = [y for y in jc if y != ball2]
-        je = [y for y in jd if y != ball3]
-        jf = [y for y in je if y != ball4]
-        ball = [y for y in jf if y != ball5]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball6 = ball[k]
+    
+        ball =  balls[0]
+        jc = [m for m in ball if m != ball1]
+        jd = [m for m in jc if m != ball2]
+        je = [m for m in jd if m != ball3]
+        jf = [m for m in je if m != ball4]
+        ball = [m for m in jf if m != ball5]
+        k = random.randint(0, 6)
+        ball6=ball[k]
         out.append(ball6)
         out = sorted(out)
         if out[4] == 46:
@@ -1454,59 +1451,56 @@ def update_output(nclicks, interball2):
         cage=mist[::-1]
         cage2 = [val for sublist in cage for val in sublist]
         balls = []
-        for i in range(0, 7):
+        for i in range(0, 8):
             ball = cage2[i::7]
             balls.append(ball)
-        ball =  balls[0]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball1 = ball[k]
+        print(balls)
+        ball =  balls[5]
+        k = random.randint(0, 6)
+        ball1=ball[k]
+        print(ball1)
         out = []
         out.append(ball1)
-        
-        ball =  balls[1]
-        ball = [y for y in ball if y != ball1]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball2 = ball[k]
-        out.append(ball2)
-        
-        ball =  balls[2]
-        jc = [y for y in ball if y != ball1]
-        ball = [y for y in jc if y != ball2]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball3 = ball[k]
-        out.append(ball3)
-
-        ball =  balls[3]
-        jc = [y for y in ball if y != ball1]
-        jd = [y for y in jc if y != ball2]
-        ball = [y for y in jd if y != ball3]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball4 = ball[k]
-        out.append(ball4)
-        
+    
         ball =  balls[4]
-        jc = [y for y in ball if y != ball1]
-        jd = [y for y in jc if y != ball2]
-        je = [y for y in jd if y != ball3]
-        ball = [y for y in je if y != ball4]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball5 = ball[k]
+        ball = [m for m in ball if m != ball1]
+        k = random.randint(0, 6)
+        ball2=ball[k]
+        print(ball2)
+        out.append(ball2)
+    
+        ball =  balls[3]
+        jc = [m for m in ball if m != ball1]
+        ball = [m for m in jc if m != ball2]
+        k = random.randint(0, 6)
+        ball3=ball[k]
+        out.append(ball3)
+    
+        ball =  balls[2]
+        jc = [m for m in ball if m != ball1]
+        jd = [m for m in jc if m != ball2]
+        ball = [m for m in jd if m != ball3]
+        k = random.randint(0, 6)
+        ball4=ball[k]
+        out.append(ball4)
+    
+        ball =  balls[1]
+        jc = [m for m in ball if m != ball1]
+        jd = [m for m in jc if m != ball2]
+        je = [m for m in jd if m != ball3]
+        ball = [m for m in je if m != ball4]
+        k = random.randint(0, 6)
+        ball5=ball[k]
         out.append(ball5)
-        
-        ball =  balls[5]
-        jc = [y for y in ball if y != ball1]
-        jd = [y for y in jc if y != ball2]
-        je = [y for y in jd if y != ball3]
-        jf = [y for y in je if y != ball4]
-        ball = [y for y in jf if y != ball5]
-        lenball = len(ball)
-        k = random.randint(0, lenball-1)
-        ball6 = ball[k]
+    
+        ball =  balls[0]
+        jc = [m for m in ball if m != ball1]
+        jd = [m for m in jc if m != ball2]
+        je = [m for m in jd if m != ball3]
+        jf = [m for m in je if m != ball4]
+        ball = [m for m in jf if m != ball5]
+        k = random.randint(0, 6)
+        ball6=ball[k]
         out.append(ball6)
         out = sorted(out)
         if out[4] == 46:
@@ -1545,9 +1539,9 @@ def update_output(interball2):
 def make_graph5(intermediatevalue):
     with open('sky1.txt') as json_file:
         sky = json.load(json_file)
-    y = sky[-37:-1]
+    sky = sky[-37:-1]
     c = []
-    for i in y:
+    for i in sky:
         g = sum(i)
         c.append(g) 
     data = go.Scatter(
@@ -1753,83 +1747,85 @@ def update_output(nclicks, intermed1):
         gh3 = x5.tolist()
         gh1 = [val for sublist in gh3 for val in sublist] 
         gh2 = gh1[-9:]
-        gh3 = gh2[0]
-        if gh3 == -1:
-            x = list(range(p, gh+1))
-        elif gh3 == 0:
-            x = list(range(gh, jk+1))
-        else:
-            x = list(range(jk, ko+1))
-                
-        cage3 = [val for sublist in y for val in sublist] 
+        gh4 = gh2[1]        
+        
+        cage2 = [val for sublist in y for val in sublist] 
         
         def calrange():
             balls = []
-            for i in range(0, 6):
-                ball = cage3[i::6]
+            for i in range(0, 8):
+                ball = cage2[i::7]
                 balls.append(ball)
             ball =  balls[5]
-            lenball = len(ball)
-            k = random.randint(0, lenball-1)
-            ball1 = ball[k]
+            k = random.randint(0, 6)
+            ball1=ball[k]
             out = []
             out.append(ball1)
-            
+        
             ball =  balls[4]
-            ball = [y for y in ball if y != ball1]
-            lenball = len(ball)
-            k = random.randint(0, lenball-1)
-            ball2 = ball[k]
+            ball = [m for m in ball if m != ball1]
+            k = random.randint(0, 6)
+            ball2=ball[k]
             out.append(ball2)
-            
+        
             ball =  balls[3]
-            jc = [y for y in ball if y != ball1]
-            ball = [y for y in jc if y != ball2]
-            lenball = len(ball)
-            k = random.randint(0, lenball-1)
-            ball3 = ball[k]
+            jc = [m for m in ball if m != ball1]
+            ball = [m for m in jc if m != ball2]
+            k = random.randint(0, 6)
+            ball3=ball[k]
             out.append(ball3)
         
             ball =  balls[2]
-            jc = [y for y in ball if y != ball1]
-            jd = [y for y in jc if y != ball2]
-            ball = [y for y in jd if y != ball3]
-            lenball = len(ball)
-            k = random.randint(0, lenball-1)
-            ball4 = ball[k]
+            jc = [m for m in ball if m != ball1]
+            jd = [m for m in jc if m != ball2]
+            ball = [m for m in jd if m != ball3]
+            k = random.randint(0, 6)
+            ball4=ball[k]
             out.append(ball4)
-            
+        
             ball =  balls[1]
-            jc = [y for y in ball if y != ball1]
-            jd = [y for y in jc if y != ball2]
-            je = [y for y in jd if y != ball3]
-            ball = [y for y in je if y != ball4]
-            lenball = len(ball)
-            k = random.randint(0, lenball-1)
-            ball5 = ball[k]
+            jc = [m for m in ball if m != ball1]
+            jd = [m for m in jc if m != ball2]
+            je = [m for m in jd if m != ball3]
+            ball = [m for m in je if m != ball4]
+            k = random.randint(0, 6)
+            ball5=ball[k]
             out.append(ball5)
-            
+        
             ball =  balls[0]
-            jc = [y for y in ball if y != ball1]
-            jd = [y for y in jc if y != ball2]
-            je = [y for y in jd if y != ball3]
-            jf = [y for y in je if y != ball4]
-            ball = [y for y in jf if y != ball5]
-            lenball = len(ball)
-            k = random.randint(0, lenball-1)
-            ball6 = ball[k]
+            jc = [m for m in ball if m != ball1]
+            jd = [m for m in jc if m != ball2]
+            je = [m for m in jd if m != ball3]
+            jf = [m for m in je if m != ball4]
+            ball = [m for m in jf if m != ball5]
+            k = random.randint(0, 6)
+            ball6=ball[k]
             out.append(ball6)
             out = sorted(out)
-            dsf = sum(out)
-            if dsf in x:
-                return dsf
-            else:
-                ds = calrange()
+            return(out)
+
+        ds1 = calrange()
         
-        ds = calrange()
-        print(ds)
+        geg=[]
+        
+        def sum_agg():
+            ds1 = calrange()
+            dsf = sum(ds1)
+            if gh4 == -1:
+                xop = list(range(p, gh+1))
+            elif gh4 == 0:
+                xop = list(range(gh, jk+1))
+            else:
+                xop = list(range(jk, ko+1))
+            if dsf in xop:
+                return ds1
+            else:
+                ds = sum_agg()
+                return ds
+        
+        ds2 = sum_agg()
         with open('out3.txt', 'w') as outfile:
-            return json.dump(ds, outfile)
+            return json.dump(ds2, outfile)
     
 
 @app.callback(Output('ball3', 'value'),
