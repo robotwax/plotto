@@ -365,124 +365,86 @@ def dynamic_layout2(_):
 
 @app.callback(Output('intermediate-value', 'children'), [Input('slider', 'value')])
 def update_graph(value):
-    bk3=yearlist()
-    bk4=(list(bk3))
-    bk3=bk4[0]
-    kx = value[0]
-    ky = value[1]
-    lendfi = []
-    gg=[]
-    sky = []
-    if kx == bk3[22] and ky == bk3[-1]:
-        i = bk3[22]
-        j = bk3[-1]
-        newlist1 = []
-        bx = []
-        for x in range(i, j+1):
-            bx.append(x)
-        bz = []
-        i = 0
-        for i in bx:
-            while len(bz) <= len(bx)-1:
-                gb = "https://www.irishlottery.com/archive-"
-                kz = gb + str(i)
-                bz.append(kz)
-                i += 1
-        for c in bz:
-            url = c
-            print(url)
-            html = urlopen(url)
-        
-            soup = BeautifulSoup(html, 'lxml')
-        
-            # Get the title
-            table = soup.findAll('table')[0] 
-            df = pd.read_html(str(table))
-            df= (df[0].to_json(orient='split'))
-            df = pd.read_json(df, orient='split')
-            lendf = (len(df))
-            gg.append(lendf)
-            i = 1
-            while i <= lendf-1:
-                df1 = df.loc[[i], 'Draw Result:'].tolist()
-                clean = str(df1)
-                clean = clean.replace("\'", "")
-                clean = clean.replace(" ", ", ")
-                clean = clean.replace("list(", "")
-                clean = clean.replace(")", "")
-                newlist = 'clean = ' + clean
-                exec(newlist)
-                newlist1.append(clean)
-                i += 1
-        sky = str(newlist1)
-        sky = sky.replace("\'[\'[", "[[")
-        sky = sky.replace("]\']\'", "]]")
-        sky = sky.replace("\'[", "[")
-        sky = sky.replace("]\'", "]")
-        newlist1 = ast.literal_eval(sky)
-        sky = newlist1[:]
-        kivy = len(sky)
-        print(kivy)
-        with open('sky1.txt') as json_file:
-            sky1 = json.load(json_file)
-            sky1=sky1[0]
-        kivy2 = len(sky1)
-        print(kivy2)
-        if kivy != kivy2:
-            trees=[]
-            trees.append(sky)
-            trees.append(gg)
-            with open('sky1.txt', 'w') as outfile:
-                json.dump(trees, outfile)
-            return json.dumps(sky)
-        else:
-            dry=[]
-            dry.append(sky)
-            dry.append(gg)
-            return json.dumps(dry) 
-    elif kx == ky:
-        gb = "https://www.irishlottery.com/archive-"
-        kz = gb + str(kx)
-        url = kz
-        print(url)
-        html = urlopen(url)
-
-        soup = BeautifulSoup(html, 'lxml')
-
-        # Get the title
-        table = soup.findAll('table')[0] 
-        df = pd.read_html(str(table))
-        df= (df[0].to_json(orient='split'))
-
-        df = pd.read_json(df, orient='split')
-        lendf = len(df)
-        gg.append(lendf)
-        i = 1
-        while i <= lendf -1:
-            df1 = df.loc[[i], 'Draw Result:'].tolist()
-            clean = str(df1)
-            clean = clean.replace("\'", "")
-            clean = clean.replace(" ", ", ")
-            clean = clean.replace("list(", "")
-            clean = clean.replace(")", "")
-            newlist = 'clean = ' + clean
-            exec(newlist)
-            sky.append(clean)
-            i += 1
-    else:
-        bx = []
-        for i in range(kx, (ky+1)):
-            bx.append(i)
-        bz = []
-        i = 0
-        for i in bx:
-            while len(bz) <= len(bx)-1:
-                gb = "https://www.irishlottery.com/archive-"
-                kz = gb + str(i)
-                bz.append(kz)
-                i += 1
-        for c in bz:
-            url = c
+    try:
+        bk3=yearlist()
+        bk4=(list(bk3))
+        bk3=bk4[0]
+        kx = value[0]
+        ky = value[1]
+        lendfi = []
+        gg=[]
+        sky = []
+        if kx == bk3[22] and ky == bk3[-1]:
+            i = bk3[22]
+            j = bk3[-1]
+            newlist1 = []
+            bx = []
+            for x in range(i, j+1):
+                bx.append(x)
+            bz = []
+            i = 0
+            for i in bx:
+                while len(bz) <= len(bx)-1:
+                    gb = "https://www.irishlottery.com/archive-"
+                    kz = gb + str(i)
+                    bz.append(kz)
+                    i += 1
+            for c in bz:
+                url = c
+                print(url)
+                html = urlopen(url)
+            
+                soup = BeautifulSoup(html, 'lxml')
+            
+                # Get the title
+                table = soup.findAll('table')[0] 
+                df = pd.read_html(str(table))
+                df= (df[0].to_json(orient='split'))
+                df = pd.read_json(df, orient='split')
+                lendf = (len(df))
+                gg.append(lendf)
+                i = 1
+                while i <= lendf-1:
+                    df1 = df.loc[[i], 'Draw Result:'].tolist()
+                    clean = str(df1)
+                    clean = clean.replace("\'", "")
+                    clean = clean.replace(" ", ", ")
+                    clean = clean.replace("list(", "")
+                    clean = clean.replace(")", "")
+                    newlist = 'clean = ' + clean
+                    exec(newlist)
+                    newlist1.append(clean)
+                    i += 1
+            sky = str(newlist1)
+            sky = sky.replace("\'[\'[", "[[")
+            sky = sky.replace("]\']\'", "]]")
+            sky = sky.replace("\'[", "[")
+            sky = sky.replace("]\'", "]")
+            newlist1 = ast.literal_eval(sky)
+            sky = newlist1[:]
+            kivy = len(sky)
+            print(kivy)
+            with open('sky1.txt') as json_file:
+                sky1 = json.load(json_file)
+                sky1=sky1[0]
+            kivy2 = len(sky1)
+            print(kivy2)
+            if kivy != kivy2:
+                trees=[]
+                trees.append(sky)
+                trees.append(gg)
+                with open('sky1.txt', 'w') as outfile:
+                    json.dump(trees, outfile)
+                return json.dumps(sky)
+            else:
+                dry=[]
+                dry.append(sky)
+                dry.append(gg)
+                return json.dumps(dry) 
+        elif kx == ky:
+            gb = "https://www.irishlottery.com/archive-"
+            kz = gb + str(kx)
+            url = kz
             print(url)
             html = urlopen(url)
     
@@ -492,11 +454,12 @@ def update_graph(value):
             table = soup.findAll('table')[0] 
             df = pd.read_html(str(table))
             df= (df[0].to_json(orient='split'))
+    
             df = pd.read_json(df, orient='split')
-            lendf = (len(df))
+            lendf = len(df)
             gg.append(lendf)
             i = 1
-            while i <= lendf-1:
+            while i <= lendf -1:
                 df1 = df.loc[[i], 'Draw Result:'].tolist()
                 clean = str(df1)
                 clean = clean.replace("\'", "")
@@ -507,17 +470,59 @@ def update_graph(value):
                 exec(newlist)
                 sky.append(clean)
                 i += 1
-    sky = str(sky)
-    sky = sky.replace("\'[\'[", "[[")
-    sky = sky.replace("]\']\'", "]]")
-    sky = sky.replace("\'[", "[")
-    sky = sky.replace("]\'", "]")
-    sky = ast.literal_eval(sky)
-    sky=sky[:]
-    dry=[]
-    dry.append(sky)
-    dry.append(gg)
-    return json.dumps(dry)
+        else:
+            bx = []
+            for i in range(kx, (ky+1)):
+                bx.append(i)
+            bz = []
+            i = 0
+            for i in bx:
+                while len(bz) <= len(bx)-1:
+                    gb = "https://www.irishlottery.com/archive-"
+                    kz = gb + str(i)
+                    bz.append(kz)
+                    i += 1
+            for c in bz:
+                url = c
+                print(url)
+                html = urlopen(url)
+        
+                soup = BeautifulSoup(html, 'lxml')
+        
+                # Get the title
+                table = soup.findAll('table')[0] 
+                df = pd.read_html(str(table))
+                df= (df[0].to_json(orient='split'))
+                df = pd.read_json(df, orient='split')
+                lendf = (len(df))
+                gg.append(lendf)
+                i = 1
+                while i <= lendf-1:
+                    df1 = df.loc[[i], 'Draw Result:'].tolist()
+                    clean = str(df1)
+                    clean = clean.replace("\'", "")
+                    clean = clean.replace(" ", ", ")
+                    clean = clean.replace("list(", "")
+                    clean = clean.replace(")", "")
+                    newlist = 'clean = ' + clean
+                    exec(newlist)
+                    sky.append(clean)
+                    i += 1
+        sky = str(sky)
+        sky = sky.replace("\'[\'[", "[[")
+        sky = sky.replace("]\']\'", "]]")
+        sky = sky.replace("\'[", "[")
+        sky = sky.replace("]\'", "]")
+        sky = ast.literal_eval(sky)
+        sky=sky[:]
+        dry=[]
+        dry.append(sky)
+        dry.append(gg)
+        return json.dumps(dry)
+    except:
+        with open('sky1.txt') as json_file:
+            sky = json.load(json_file)
+        return json.dumps(sky)
 
 @app.callback(Output('intermediate-water', 'children'),
     [Input('intermediate-value', 'children'),
