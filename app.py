@@ -7,7 +7,6 @@ from pandas import DataFrame
 import numpy as np
 import numpy as nd
 import numpy.ma as ma
-import plotly.plotly as py
 from plotly.graph_objs import *
 import plotly
 import  plotly.graph_objs as go
