@@ -30,6 +30,7 @@ nbformat==4.4.0
 numpy==1.16.2
 pandas==0.24.2
 Pillow==5.4.1
+-e hg+https://bitbucket.org/etienned/pil-2009-raclette/#egg=PIL
 plotly==3.7.1
 psutil==5.6.2
 pycparser==2.19

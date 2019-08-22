@@ -9,6 +9,7 @@ import numpy as nd
 import numpy.ma as ma
 import plotly.plotly as py
 from plotly.graph_objs import *
+import plotly
 import  plotly.graph_objs as go
 import dash
 import dash_core_components as dcc
@@ -51,13 +52,11 @@ class linked_list:
         cur.next=new_node
 
     def display(self):
-        elems=[]
         cur_node=self.head
         while cur_node.next!=None:
             cur_node=cur_node.next
-            elems.append(cur_node.data)
-        with open('ash.txt', 'w') as outfile:
-            return json.dump(elems, outfile)
+            yield(cur_node)
+
 
     # Returns the length (integer) of the linked list.
     def length(self):
@@ -80,135 +79,15 @@ class linked_list:
             if cur_idx==index: return cur_node.data
             cur_idx+=1
 
-d = datetime.datetime.now()
-f = []
-f.append(d)
-f = str(f)
-g = f.replace('[datetime.datetime(', '')
-k = g[:4]
-m = int(k)
-bk3 = []
-for i in range(1993, m+1):
-    bk3.append(i)
-with open('bk2.txt', 'w') as outfile:
-    json.dump(bk3, outfile)
-    
-def signed():
-    td = datetime.datetime.now()
-    td = str(td)
-    cleantd = td.replace('[datetime.datetime(', '')
-    sign= bcrypt.hashpw(cleantd.encode('utf-8'), bcrypt.gensalt()) 
-    encoded = base64.b64encode(sign)
-    s1 = encoded.decode('ascii')
-    s2 = s1[74:]
-    s3 = s1[67:74]
-    s4 = s1[60:67]
-    s5 = s1[54:60]
-    s6 = s1[47:54]
-    s7 = s1[40:47]
-    s8 = s1[34:40]
-    s9 = s1[27:34]
-    s10 = s1[20:27]
-    s11 = s1[14:20]
-    s12 = s1[64:70]
-    with open('keys.txt') as inFile:
-        try: 
-             tet = json.load(inFile)
-        except ValueError: 
-             tet = []
-    tet.append( '{}.txt'.format(s2))
-    tet.append('{}.txt'.format(s3))
-    tet.append('{}.txt'.format(s4))
-    tet.append('{}.txt'.format(s5))
-    tet.append('{}.txt'.format(s6))
-    tet.append('{}.txt'.format(s7))
-    tet.append('{}.txt'.format(s8))
-    tet.append('{}.txt'.format(s9))
-    tet.append('{}.txt'.format(s10))
-    tet.append('{}.txt'.format(s11))
-    tet.append('{}.txt'.format(s12))
-    with open('keys.txt', 'w') as outfile:
-        tet = json.dump(tet, outfile)
-    return(s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12)
+def yearlist():
+    d = datetime.datetime.now()
+    bk3 = []
+    for i in range(1993, d.year+1):
+        bk3.append(i)
+    yield(bk3)
 
-
-
-ftd = signed()
-(s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12) = ftd
-
-def rem():
-    skies =  '{}.txt'.format(s7)
-    fire =  '{}.txt'.format(s8)
-    rains =  '{}.txt'.format(s10)
-    air = '{}.txt'.format(s2)
-    earth = '{}.txt'.format(s6)
-    water =  '{}.txt'.format(s11)
-    clicks11 = '{}.txt'.format(s4)
-    clicks22 = '{}.txt'.format(s5)
-    wind = '{}.txt'.format(s9)
-    outseg = '{}.txt'.format(s3)
-    indexd = [skies, fire, rains, air, earth, water, clicks11, clicks22, wind, outseg]
-    if os.path.exists(air):
-        os.remove(air)
-    if os.path.exists(skies):
-        os.remove(skies)
-    if os.path.exists(fire):
-        os.remove(fire)
-    if os.path.exists(rains):
-        os.remove(rains)
-    if os.path.exists(earth):
-        os.remove(earth)
-    if os.path.exists(water):
-        os.remove(water)
-    if os.path.exists(clicks11):
-        os.remove(clicks11)
-    if os.path.exists(clicks22):
-        os.remove(clicks22)
-    if os.path.exists(wind):
-        os.remove(wind)
-    if os.path.exists(outseg):
-        os.remove(clicks22)
-    with open('keys.txt') as json_file:
-        tet = json.load(json_file)
-    for c in indexd:
-        try:
-            kkg = tet.index(c)
-            del tet[kkg]
-            with open('keys.txt', 'w') as outfile:
-                 return json.dump(tet, outfile)
-        except ValueError:
-            return 'all files deleted'
-
-def imagerem():
-    gyh=[]
-    for i in range(1, 47):
-        x = 'images/base' + str(bk3[-1]) + '-' + str(i) + '.png'
-        gyh.append(x)
-        for j in gyh:
-            if os.path.exists(j):
-                os.remove(j)
-    return 'Images deleted'
-
-def keyrem():
-    with open('keys.txt') as json_file:
-        tet = json.load(json_file)
-    for i in tet:
-        DAYS = 2
-        removed = 0
-        time_in_secs = 39
-        if os.path.exists(i):
-            try:
-                oldest_file = min(i, key=os.path.getctime)
-            except FileNotFoundError:
-                return 'key removed'
-            if oldest_file <= time_in_secs:
-                os.remove(oldest_file)
-            kkg = tet.index(oldest_file)
-            del tet[kkg]
-            with open('keys.txt', 'w') as outfile:
-                 json.dump(tet, outfile)
-            removed += 1
-    return 'key removed'
+bk3=yearlist()
+bk3 = (list(bk3))
 
 # Create a login route
 @app.server.route('/custom-auth/login', methods=['POST'])
@@ -290,19 +169,9 @@ result_history = html.Div([
     ], className='row'),
 ])
 
-def changeImageSize(maxWidth, 
-    maxHeight, 
-    image):
 
-    widthRatio  = maxWidth/image.size[0]
-    heightRatio = maxHeight/image.size[1]
 
-    newWidth    = int(widthRatio*image.size[0])
-    newHeight   = int(heightRatio*image.size[1])
-
-    newImage    = image.resize((newWidth, newHeight))
-    return newImage
-
+bk3=bk3[0]
 i = bk3[22]
 j = bk3[-1]
 
@@ -370,13 +239,13 @@ app.layout = html.Div([
         html.H3('Statistical Analysis', className="eleven columns offset-by-one"), 
     ], className = "row"),
     html.Div([
-        html.P('These two graphs return statistics based off of results from both the upper and lower graphs. The graph on the right shows the distribution of results, for a single initial (or base-ball) for that entire year. The same search determine the results of the graph on the left. This graph shows the percentages of numbers, for each of the six balls drawn in order. These are arranged on a per ball basis and are determined by the slider in the lower graph. So, if the slider in the lower graph is set to \'2\', the first ball will read \'100%\', because all of the first balls are \'2\'. Each of the other balls will display different numbers, which are the results that all share the first ball in common.', className="ten columns offset-by-one"),
+        html.P('These two graphs return statistics based off of results from both the upper and lower graphs. The graph on the right shows the distribution of results, for a single initial ball for that entire year. The same search determines the results of the graph on the left. This graph shows the percentages of numbers, for each of the six balls drawn in order. These are arranged on a per ball basis and are determined by the slider in the lower graph. So, if the slider in the lower graph is set to \'2\', the first ball will read \'100%\', because all of the first balls are \'2\'. Each of the other balls will display different numbers, which are the results that all share the first ball in common.', className="ten columns offset-by-one"),
     ], className = "row"),
     html.Br(),
     html.Div([
         dcc.Graph(id='lotto3', style={'height': '60vh'},
         className="six columns"),
-        html.Img(id='lotto2', style={'height': '60vh', 'margin-left': 14, 'margin-top': 14}, className="six columns"),
+        dcc.Graph(id='lotto2', style={'height': '60vh', 'margin-left': 14, 'margin-top': 14}, className="six columns"),
         dcc.RadioItems(id = 'radio',
             options=[
                 {'label': '1', 'value': '1'},
@@ -462,12 +331,6 @@ app.layout = html.Div([
     html.Div([
     html.Button(id='submit-button3', n_clicks=0, children='Predict', className="two columns offset-by-eight"),
     ], className="row"),
-    html.Div(id='intermediate-delog', style={'display': 'none'}),
-    html.Div(id='intermediate-delog2', style={'display': 'none'}),
-    dcc.ConfirmDialog(
-        id='confirm',
-        message='Your session has timed out. Reload to continue using Plotto Predict',
-    ),
     html.Br(),
     html.Div([
               html.Br(),
@@ -503,11 +366,9 @@ def dynamic_layout2(_):
 
 @app.callback(Output('intermediate-value', 'children'), [Input('slider', 'value')])
 def update_graph(value):
-    skies =  '{}.txt'.format(s7)
-    fire =  '{}.txt'.format(s8)
-    rains =  '{}.txt'.format(s10)
-    with open('bk2.txt') as json_file:
-        bk3 = json.load(json_file)
+    bk3=yearlist()
+    bk4=(list(bk3))
+    bk3=bk4[0]
     kx = value[0]
     ky = value[1]
     lendfi = []
@@ -541,6 +402,7 @@ def update_graph(value):
             df= (df[0].to_json(orient='split'))
             df = pd.read_json(df, orient='split')
             lendf = (len(df))
+            gg.append(lendf)
             i = 1
             while i <= lendf-1:
                 df1 = df.loc[[i], 'Draw Result:'].tolist()
@@ -561,17 +423,24 @@ def update_graph(value):
         newlist1 = ast.literal_eval(sky)
         sky = newlist1[:]
         kivy = len(sky)
+        print(kivy)
         with open('sky1.txt') as json_file:
             sky1 = json.load(json_file)
+            sky1=sky1[0]
         kivy2 = len(sky1)
+        print(kivy2)
         if kivy != kivy2:
+            trees=[]
+            trees.append(sky)
+            trees.append(gg)
             with open('sky1.txt', 'w') as outfile:
-                json.dump(sky, outfile)
-            with open('sky.txt', 'w') as outfile:
-                return json.dump(sky, outfile)
+                json.dump(trees, outfile)
+            return json.dumps(sky)
         else:
-            with open('sky.txt', 'w') as outfile:
-                return json.dump(sky, outfile) 
+            dry=[]
+            dry.append(sky)
+            dry.append(gg)
+            return json.dumps(dry) 
     elif kx == ky:
         gb = "https://www.irishlottery.com/archive-"
         kz = gb + str(kx)
@@ -639,8 +508,6 @@ def update_graph(value):
                 exec(newlist)
                 sky.append(clean)
                 i += 1
-    with open('rain.txt', 'w') as outfile:
-        json.dump(gg, outfile)
     sky = str(sky)
     sky = sky.replace("\'[\'[", "[[")
     sky = sky.replace("]\']\'", "]]")
@@ -648,14 +515,15 @@ def update_graph(value):
     sky = sky.replace("]\'", "]")
     sky = ast.literal_eval(sky)
     sky=sky[:]
-    with open('sky.txt', 'w') as outfile:
-        return json.dump(sky, outfile)
+    dry=[]
+    dry.append(sky)
+    dry.append(gg)
+    return json.dumps(dry)
 
 @app.callback(Output('intermediate-water', 'children'),
     [Input('intermediate-value', 'children'),
     Input('slider', 'value')])
 def make_graph1(intermediatevalue, slider):
-    water = '{}.txt'.format(s11)
     kx = slider[0]
     ky = slider[1]
     d = datetime.datetime.now()
@@ -693,23 +561,22 @@ def make_graph1(intermediatevalue, slider):
         if xc:
             df.append(47)
     topg = (max(df))
-    with open('water.txt', 'w') as outfile:
-        return json.dump(topg, outfile)
+    return json.dumps(topg)
     
 @app.callback(Output('lotto', 'figure'),
     [Input('intermediate-value', 'children'),
     Input('intermediate-water', 'children'),
     Input('slider', 'value')])
 def make_graph3(intermediatevalue, intermediatewater, value):
-    skies =  '{}.txt'.format(s7)
-    water =  '{}.txt'.format(s11)
-    with open('bk2.txt') as json_file:
-        bk3 = json.load(json_file)
+    bk3=yearlist()
+    bk4=(list(bk3))
+    bk3=bk4[0]
     kx = value[0]
     ky = value[1]
     if kx == bk3[22] and ky == bk3[-1]:
         with open('sky1.txt', 'r') as json_file:
             sky1 = json.load(json_file)
+            sky1=sky1[0]
         sky1 = sky1[::-1]
         trace1 = dict(
             type="surface",
@@ -762,7 +629,7 @@ def make_graph3(intermediatevalue, intermediatewater, value):
                     "type": "category",
                     "zeroline": False,
                     "categoryorder": 'array',
-                    "categoryarray": list(reversed(g))
+                    "categoryarray": list(reversed(bk3))
                 },
                 yaxis={
                     "showgrid": True,
@@ -776,10 +643,9 @@ def make_graph3(intermediatevalue, intermediatewater, value):
         # py.iplot(figure)
         return figure
     else:
-        with open('sky.txt', 'r') as json_file:
-            sky = json.load(json_file)
-        with open('water.txt', 'r') as json_file:
-            topg = json.load(json_file)
+        sky = json.loads(intermediatevalue)
+        sky=sky[0]
+        topg = json.loads(intermediatewater)
         sky = sky[::-1]
         trace1 = dict(
             type="surface",
@@ -832,7 +698,7 @@ def make_graph3(intermediatevalue, intermediatewater, value):
                     "type": "category",
                     "zeroline": False,
                     "categoryorder": 'array',
-                    "categoryarray": list(reversed(g))
+                    "categoryarray": list(reversed(bk3))
                 },
                 yaxis={
                     "showgrid": True,
@@ -852,22 +718,19 @@ def make_graph3(intermediatevalue, intermediatewater, value):
     Input('slider', 'value'),
     Input('intermediate-water', 'children')])
 def make_graph4(intermediatevalue, value, slider, intermediatewater):
-    skies =  '{}.txt'.format(s7)
-    fire =  '{}.txt'.format(s8)
-    earth = '{}.txt'.format(s6)
-    water = '{}.txt'.format(s11)
-    with open('bk2.txt') as json_file:
-        bk3 = json.load(json_file)
+    bk3=yearlist()
+    bk4=(list(bk3))
+    bk3=bk4[0]
     kx = slider[0]
     ky = slider[1]
     if  kx == bk3[22] and ky == bk3[-1]:
         with open('sky1.txt', 'r') as json_file:
             sky = json.load(json_file)
+            sky=sky[0]
     else:
-        with open('sky.txt') as json_file:
-            sky = json.load(json_file)
-    with open('water.txt') as json_file:
-        g = json.load(json_file)
+        sky = json.loads(intermediatevalue)
+        sky= sky[0]
+    g = json.loads(intermediatewater)
     sky2 = [val for sublist in sky for val in sublist] 
     ball1 = sky2[::7]
     ball1 = np.array(ball1)
@@ -900,14 +763,15 @@ def make_graph4(intermediatevalue, value, slider, intermediatewater):
     lenpercentball = g - value
     percentball = np.array(percentball).reshape(lenpercentball, 6)
     percentball = percentball.tolist()
-    with open('fire.txt', 'w') as outfile:
-        json.dump(percentball, outfile)
     roller = np.concatenate(rollerball, axis=0)
     roller = np.array(roller).reshape(7, x)
     roller = np.rot90(roller, 1)
     roller = np.array(roller).tolist()
-    with open('earth.txt', 'w') as outfile:
-        return json.dump(roller, outfile)
+    fire=[]
+    fire.append(roller)
+    fire.append(percentball)
+    print(fire)
+    return json.dumps(fire)
 
 @app.callback(Output('lotto3', 'figure'),
     [Input('intermediate-value', 'children'),
@@ -916,20 +780,21 @@ def make_graph4(intermediatevalue, value, slider, intermediatewater):
     Input('slider', 'value'),
     Input('intermediate-water', 'children')])
 def make_graph2(intermediatevalue, value, radio, slider, intermediatewater):
-    skies =  '{}.txt'.format(s7)
-    water = '{}.txt'.format(s11)
-    with open('bk2.txt') as json_file:
-        bk3 = json.load(json_file)
+    bk3=yearlist()
+    bk3=yearlist()
+    bk4=(list(bk3))
+    bk3=bk4[0]
     kx = slider[0]
     ky = slider[1]
     if kx == bk3[22] and ky == bk3[-1]:
-        with open('sky1.txt', 'r') as json_file:
+        with open('sky1.txt') as json_file:
             sky = json.load(json_file)
+            sky = sky[0]
     else:
-        with open('sky.txt') as json_file:
-            sky = json.load(json_file)
-    with open('water.txt') as json_file:
-        g = json.load(json_file)
+        sky = json.loads(intermediatevalue)
+        sky=sky[0]
+    g = json.loads(intermediatewater)
+    print(g)
     sky2 = [val for sublist in sky for val in sublist] 
     ball1 = sky2[::7]
     ball1 = np.array(ball1)
@@ -987,48 +852,42 @@ def make_graph2(intermediatevalue, value, radio, slider, intermediatewater):
     return fig
 
 
-@app.callback(Output('lotto2', 'src'),
+@app.callback(Output('lotto2', 'figure'),
     [Input('intermediate-value2', 'children'),
+    Input('intermediate-value', 'children'),
     Input('slider2', 'value'),
-    Input('slider', 'value')])
-def make_graph5(intermediatevalue2, value, slider):
-    rains =  '{}.txt'.format(s10)
-    water = '{}.txt'.format(s11)
-    earth = '{}.txt'.format(s6)
+    Input('slider', 'value'),
+    Input('intermediate-water', 'children')])
+def make_graph5(intermediatevalue2, intermediatevalue, value, slider, intermediatewater):
     kx = slider[0]
-    with open('earth.txt') as json_file:
-        earth = json.load(json_file)
-    if not os.path.exists('images'):
-        os.mkdir('images')
-    with open('water.txt') as json_file:
-        cf = json.load(json_file)
-    with open('rain.txt', 'r') as json_file:
-        rain = json.load(json_file)
+    earth = json.loads(intermediatevalue2)
+    earth=earth[0]
+    cf = json.loads(intermediatewater)
+    rain3 = json.loads(intermediatevalue)
+    rain2 = rain3[1]
+    rain=rain2[0]
+    print('rain', rain)
     earth = earth[::-1]
-    rain = rain[0]
-    rain = rain//7
-    earth2 = earth[:rain]
-    cal = len(earth2)
-    earth = np.array(earth2).reshape(cal, 7)
-    earth = earth.tolist()
-    with open('bk2.txt') as json_file:
-        bk3 = json.load(json_file)
+    print(earth)
+    earth4 = earth[:rain]
+    print(earth4)
+    earth={}
+    data=[]
+    xlist = iter(range(1, 8))
+    xlist = list(xlist)
+    print(xlist)
     if kx == bk3[22]:
-        image_filename = 'images/base2015-' + str(value) + '.png'
-        if os.path.exists(image_filename):
-            encoded_image = base64.b64encode(open(image_filename, 'rb').read())    
-            return 'data:image/png;base64,{}'.format(encoded_image.decode())
-        else:    
-            ylist = earth[0]
-            xlist = iter(range(1, 8))
-            xlist = list(xlist)
-            data = go.Scatter(
-                 x = xlist,
-                 y = ylist
-            ),
-            layout = dict(
+        for idx, val in enumerate(earth4):
+            earth[idx]=val
+        for res in earth.values():
+            data.append(dict(x= xlist, y=res, type='scatter', mode='lines + markers'))
+        print(data)
+        figure={
+            'data': data,
+            'layout' : dict(
                 title = "Initial Ball:" + str(value) + "| Year: 2015",
                 paper_bgcolor= "#ffffff",
+                showlegend =  False, 
                 plot_bgcolor= "rgb(208, 248, 255)",
                 autosize=True,
                 font=dict(
@@ -1052,196 +911,52 @@ def make_graph5(intermediatevalue2, value, slider):
                     "showgrid": True,
                     "title": "Number",
                 },
-            )
-            fig = dict(data=data, layout=layout)
-            pio.write_image(fig, 'images/base2015-' + str(value) + '.png')
-            del earth[0]
-            xc = iter(range(0, len(earth)))
-            i = 0
-            for i in list(xc):
-                for val in (earth):
-                    while i <= len(earth)-1:
-                        data = go.Scatter(
-                             x = xlist,
-                             y = earth[i],
-                        ),
-                        layout = dict(
-                            title = "Initial Ball:" + str(value) + "| Year: 2015",
-                            paper_bgcolor= "rgb(255, 255, 255)",
-                            autosize=True,
-                            font=dict(
-                                size=12,
-                                color="#CCCCCC",
-                            ),
-                            margin=dict(
-                                t=50,
-                                l=50,
-                                b=50,
-                                r=5,
-                            ),
-                            hovermode='closest',
-                            xaxis={
-                                "showgrid": False,
-                                "title": "Position",
-                                "type": "category",
-                            },
-                            yaxis={
-                                "range": [0, cf +2],
-                                "showgrid": False,
-                                "title": "Number",
-                            },
-                        )
-                        fig = dict(data=data, layout=layout)
-                        newfile = 'images/fig0.png'
-                        pio.write_image(fig, newfile)
-                        image1 = Image.open('images/base2015-' + str(value) + '.png')
-                        image2 = Image.open(newfile)
-                        
-                        image3 = changeImageSize(800, 500, image1)
-                        image4 = changeImageSize(800, 500, image2)
-                        
-                        # Make sure images got an alpha channel
-                        image5 = image3.convert("RGBA")
-                        image6 = image4.convert("RGBA")
-                        datas = image6.getdata()
-                        
-                        newData = []
-                        for item in datas:
-                            if item[0] == 255 and item[1] == 255 and item[2] == 255:
-                                newData.append((255, 255, 255, 0))
-                            else:
-                                newData.append(item)
-                                
-                        image6.putdata(newData)
-                        background = image5
-                        foreground = image6
-                        
-                        background.paste(foreground, (0, 0), foreground)
-                        background.save('images/base2015-' + str(value) + '.png', compress_level=1)
-                        i+=1
-            image_filename = 'images/base' + str(kx) + '-' + str(value) + '.png'
-            encoded_image = base64.b64encode(open(image_filename, 'rb').read())    
-            return 'data:image/png;base64,{}'.format(encoded_image.decode())
-
-    else:
-        if os.path.exists('images/base' + str(kx) + '-' + str(value) + '.png'):
-            image_filename = 'images/base' + str(kx) + '-' + str(value) + '.png'
-            encoded_image = base64.b64encode(open(image_filename, 'rb').read())    
-            return 'data:image/png;base64,{}'.format(encoded_image.decode())
-        else:    
-            ylist = earth[0]
-            xlist = iter(range(1, 8))
-            xlist = list(xlist)
-            data = go.Scatter(
-                 x = xlist,
-                 y = ylist
             ),
-            layout = dict(
-                title = "Initial Ball:" + str(value) + "| Year:" + str(kx),
-                paper_bgcolor= "#ffffff",
-                plot_bgcolor= "rgb(208, 248, 255)",
-                autosize=True,
-                font=dict(
-                    size=12,
-                    color="#CCCCCC",
-                ),
-                margin=dict(
-                    t=50,
-                    l=50,
-                    b=50,
-                    r=5,
-                ),
-                hovermode='closest',
-                xaxis={
-                    "showgrid": True,
-                    "title": "Position",
-                    "type": "category",
-                },
-                yaxis={
-                    "range": [0, cf+2],
-                    "showgrid": True,
-                    "title": "Number",
-                },
-            )
-            fig = dict(data=data, layout=layout)
-            pio.write_image(fig, 'images/base' +str(kx)  + '-' + str(value) + '.png')
-            del earth[0]
-            xc = iter(range(0, len(earth)))
-            i = 0
-            for i in list(xc):
-                for val in (earth):
-                    while i <= len(earth)-1:
-                        data = go.Scatter(
-                             x = xlist,
-                             y = earth[i],
-                        ),
-                        layout = dict(
-                            title = "Initial Ball:" + str(value) + "| Year:" + str(kx),
-                            paper_bgcolor= "rgb(255, 255, 255)",
-                            autosize=True,
-                            font=dict(
-                                size=12,
-                                color="#CCCCCC",
-                            ),
-                            margin=dict(
-                                t=50,
-                                l=50,
-                                b=50,
-                                r=5,
-                            ),
-                            hovermode='closest',
-                            xaxis={
-                                "showgrid": False,
-                                "title": "Position",
-                                "type": "category",
-                            },
-                            yaxis={
-                                "range": [0, cf +2],
-                                "showgrid": False,
-                                "title": "Number",
-                            },
-                        )
-                        fig = dict(data=data, layout=layout)
-                        newfile = 'images/fig0.png'
-                        pio.write_image(fig, newfile)
-                        image1 = Image.open('images/base' + str(kx) + '-' + str(value) + '.png')
-                        image2 = Image.open(newfile)
-                        
-                        image3 = changeImageSize(800, 500, image1)
-                        image4 = changeImageSize(800, 500, image2)
-                        
-                        # Make sure images got an alpha channel
-                        image5 = image3.convert("RGBA")
-                        image6 = image4.convert("RGBA")
-                        datas = image6.getdata()
-                        
-                        newData = []
-                        for item in datas:
-                            if item[0] == 255 and item[1] == 255 and item[2] == 255:
-                                newData.append((255, 255, 255, 0))
-                            else:
-                                newData.append(item)
-                                
-                        image6.putdata(newData)
-                        background = image5
-                        foreground = image6
-                        
-                        background.paste(foreground, (0, 0), foreground)
-                        background.save('images/base' + str(kx) + '-' + str(value) + '.png', compress_level=1)
-                        i+=1
-        image_filename = 'images/base' + str(kx) + '-' + str(value) + '.png'
-        encoded_image = base64.b64encode(open(image_filename, 'rb').read())    
-        return 'data:image/png;base64,{}'.format(encoded_image.decode())
+        }
+        return figure
+    else:
+        layout = dict(
+            paper_bgcolor= "#ffffff",
+            plot_bgcolor= "rgb(208, 248, 255)",
+            autosize=True,
+            font=dict(
+                size=12,
+                color="#CCCCCC",
+            ),
+            margin=dict(
+                t=50,
+                l=50,
+                b=50,
+                r=5,
+            ),
+            hovermode='closest',
+            xaxis={
+                "showgrid": True,
+                "title": "Position",
+                "type": "category",
+            },
+            yaxis={
+                "range": [0, cf+2],
+                "showgrid": True,
+                "title": "Number",
+            },
+        )
+        for idx, val in enumerate(earth4):
+            earth[idx]=val
+        for res in earth.values():
+            data.append(dict(x= xlist, y=res, type='scatter', mode='lines + markers'))
+        print(data)
+        layout['title'] = "Initial Ball:" + str(value) + "| Year:" + str(kx),
+        fig = dict(data=data, layout=layout)
+        return fig
 
 @app.callback(Output('lotto4', 'figure'),
-    [Input('intermediate-value2', 'children')])
-def make_graph6(intermediatevalue2):
-    water = '{}.txt'.format(s11)
-    earth = '{}.txt'.format(s6)
-    with open('earth.txt') as json_file:
-        roller = json.load(json_file)
-    with open('water.txt') as json_file:
-        cf = json.load(json_file)
+    [Input('intermediate-value2', 'children'),
+    Input('intermediate-water', 'children')])
+def make_graph6(intermediatevalue2, intermediatewater):
+    roller2 = json.loads(intermediatevalue2)
+    roller = roller2[0]
+    cf = json.loads(intermediatewater)
     if len(roller) == 1:
         roller = roller * 2
     else:
@@ -1313,31 +1028,14 @@ def make_graph6(intermediatevalue2):
 
 
 @app.callback(Output('inter-ball', 'children'),
-              [Input('submit-button', 'n_clicks')],
+              [Input('submit-button', 'n_clicks'),
+              Input('intermediate-value', 'children')],
               [State('inter-ball', 'children')])
-def update_output(nclicks, interball):
+def update_output(nclicks, intermediatevalue, interball):
     nclicks = int(nclicks)
-    clicks11 = '{}.txt'.format(s4)
-    clicks22 = '{}.txt'.format(s5)
-    if nclicks == 0:
-        with open('clicks11.txt', 'w') as outfile:
-            json.dump(nclicks, outfile)
-        with open('clicks22.txt', 'w') as outfile:
-            json.dump(nclicks, outfile)
-    nclicks2 = nclicks % 2
-    if nclicks2 == 1:
-        with open('clicks22.txt', 'w') as outfile:
-            json.dump(nclicks2, outfile)
-    if nclicks2 == 0 and nclicks > 1:
-        with open('clicks11.txt', 'w') as outfile:
-            json.dump(nclicks2, outfile)
-    with open('clicks22.txt') as json_file:
-        clicks2 = json.load(json_file)
-    with open('clicks11.txt') as json_file:
-        clicks = json.load(json_file)
-    if clicks != clicks2: 
-        with open('sky.txt') as json_file:
-            mist = json.load(json_file)
+    if nclicks > 0:
+        mist = json.loads(intermediatevalue)
+        mist = mist[0]
         mist=mist[::-1]
         cage = (mist[34:])
         cage2 = [val for sublist in cage for val in sublist]
@@ -1345,11 +1043,9 @@ def update_output(nclicks, interball):
         for i in range(0, 8):
             ball = cage2[i::7]
             balls.append(ball)
-        print(balls)
         ball =  balls[5]
         k = random.randint(0, 6)
         ball1=ball[k]
-        print(ball1)
         out = []
         out.append(ball1)
     
@@ -1357,7 +1053,6 @@ def update_output(nclicks, interball):
         ball = [m for m in ball if m != ball1]
         k = random.randint(0, 6)
         ball2=ball[k]
-        print(ball2)
         out.append(ball2)
     
         ball =  balls[3]
@@ -1408,15 +1103,15 @@ def update_output(nclicks, interball):
             out[3] = 45
             out[4] = 46
             out[5] = 47
-        with open('out.txt', 'w') as outfile:
-            return json.dump(out, outfile)
+        return json.dumps(out)
+    else:
+        return json.dumps('')
 
 
 @app.callback(Output('ball1', 'value'),
               [Input('inter-ball', 'children')])
 def update_output(interball):
-    with open('out.txt') as json_file:
-        out = json.load(json_file)
+    out = json.loads(interball)
     clean=str(out)
     clean = clean.replace(',', '  ')
     clean = clean.replace('[', '')
@@ -1425,40 +1120,23 @@ def update_output(interball):
 
 
 @app.callback(Output('inter-ball2', 'children'),
-              [Input('submit-button2', 'n_clicks')],
+              [Input('submit-button2', 'n_clicks'),
+              Input('intermediate-value2', 'children')],
               [State('inter-ball2', 'children')])
-def update_output(nclicks, interball2):
+def update_output(nclicks, intermediatevalue2, interball2):
     nclicks = int(nclicks)
-    if nclicks == 0:
-        with open('clicks33.txt', 'w') as outfile:
-            json.dump(nclicks, outfile)
-        with open('clicks44.txt', 'w') as outfile:
-            json.dump(nclicks, outfile)
-    nclicks2 = nclicks % 2
-    if nclicks2 == 1:
-        with open('clicks44.txt', 'w') as outfile:
-            json.dump(nclicks2, outfile)
-    if nclicks2 == 0 and nclicks > 1:
-        with open('clicks33.txt', 'w') as outfile:
-            json.dump(nclicks2, outfile)
-    with open('clicks44.txt') as json_file:
-        clicks2 = json.load(json_file)
-    with open('clicks33.txt') as json_file:
-        clicks = json.load(json_file)
-    if clicks != clicks2: 
-        with open('earth.txt') as json_file:
-            mist = json.load(json_file)
+    if nclicks > 0:
+        mist2 = json.loads(intermediatevalue2)
+        mist = mist2[0]
         cage=mist[::-1]
         cage2 = [val for sublist in cage for val in sublist]
         balls = []
         for i in range(0, 8):
             ball = cage2[i::7]
             balls.append(ball)
-        print(balls)
         ball =  balls[5]
         k = random.randint(0, 6)
         ball1=ball[k]
-        print(ball1)
         out = []
         out.append(ball1)
     
@@ -1466,7 +1144,6 @@ def update_output(nclicks, interball2):
         ball = [m for m in ball if m != ball1]
         k = random.randint(0, 6)
         ball2=ball[k]
-        print(ball2)
         out.append(ball2)
     
         ball =  balls[3]
@@ -1517,15 +1194,15 @@ def update_output(nclicks, interball2):
             out[3] = 45
             out[4] = 46
             out[5] = 47
-        with open('out2.txt', 'w') as outfile:
-            return json.dump(out, outfile)
+        return json.dumps(out)
+    else:
+        return json.dumps('')
 
 
 @app.callback(Output('ball2', 'value'),
               [Input('inter-ball2', 'children')])
 def update_output(interball2):
-    with open('out2.txt') as json_file:
-        out = json.load(json_file)
+    out = json.loads(interball2)
     clean=str(out)
     clean = clean.replace(',', '  ')
     clean = clean.replace('[', '')
@@ -1539,6 +1216,7 @@ def update_output(interball2):
 def make_graph5(intermediatevalue):
     with open('sky1.txt') as json_file:
         sky = json.load(json_file)
+        sky = sky[0]
     sky = sky[-37:-1]
     c = []
     for i in sky:
@@ -1577,25 +1255,10 @@ def make_graph5(intermediatevalue):
               [State('inter-med1', 'children')])
 def update_output(nclicks, intermed1):
     nclicks = int(nclicks)
-    if nclicks == 0:
-        with open('clicks55.txt', 'w') as outfile:
-            json.dump(nclicks, outfile)
-        with open('clicks66.txt', 'w') as outfile:
-            json.dump(nclicks, outfile)
-    nclicks2 = nclicks % 2
-    if nclicks2 == 1:
-        with open('clicks66.txt', 'w') as outfile:
-            json.dump(nclicks2, outfile)
-    if nclicks2 == 0 and nclicks > 1:
-        with open('clicks55.txt', 'w') as outfile:
-            json.dump(nclicks2, outfile)
-    with open('clicks66.txt') as json_file:
-        clicks2 = json.load(json_file)
-    with open('clicks55.txt') as json_file:
-        clicks = json.load(json_file)
-    if clicks != clicks2: 
+    if nclicks > 0:
         with open('sky1.txt') as json_file:
             sky = json.load(json_file)
+            sky = sky[0]
         y = sky[-36:-1]
         c = []
         for i in y:
@@ -1824,30 +1487,19 @@ def update_output(nclicks, intermed1):
                 return ds
         
         ds2 = sum_agg()
-        with open('out3.txt', 'w') as outfile:
-            return json.dump(ds2, outfile)
-    
+        return json.dumps(ds2)
+    else:
+        return json.dumps('')
 
 @app.callback(Output('ball3', 'value'),
               [Input('inter-med1', 'children')])
 def update_output(intermed1):
-    with open('out3.txt') as json_file:
-        out = json.load(json_file)
+    out = json.loads(intermed1)
     clean=str(out)
     clean = clean.replace(',', '  ')
     clean = clean.replace('[', '')
     clean = clean.replace(']', '')
     return clean
-
-@app.callback(Output('confirm', 'displayed'),
-              [Input('intermediate-delog', 'id')])
-def user_account2(intermediatedelog):
-    x = time.sleep(129621)
-    while x == False:
-        return False
-    else:
-        kml = imagerem()
-        return True
 
 if __name__ == '__main__':
     app.run_server(debug=True)
