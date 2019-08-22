@@ -18,14 +18,10 @@ import datetime
 import json
 import ast
 import os
-import plotly.io as pio
-from PIL import Image, ImageFile
 import base64
 import random
 import bcrypt
 import time
-
-pio.orca.config.executable = '/Users/Koala/.npm/bin/orca'
 
 external_stylesheets = ['/assets/code.css']
 
@@ -121,7 +117,6 @@ def route_logout():
 app.config['suppress_callback_exceptions'] = True
 app.css.config.serve_locally = True
 app.scripts.config.serve_locally = True
-ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 server = app.server
 
