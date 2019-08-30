@@ -228,6 +228,7 @@ app.layout = html.Div([
     html.Div(id='intermediate-water', style={'display': 'none'}),
     html.Div(id='intermediate-lotto2', style={'display': 'none'}),
     html.Div(id='intermediate-auth', style={'display': 'none'}),
+    html.Div(id='interout', style={'display': 'none'}),
     html.Hr(),
     html.Div([
         html.H3('Statistical Analysis', className="eleven columns offset-by-one"), 
@@ -386,7 +387,6 @@ def update_graph(value):
                     i += 1
             for c in bz:
                 url = c
-                print(url)
                 html = urlopen(url)
             
                 soup = BeautifulSoup(html, 'lxml')
@@ -418,12 +418,10 @@ def update_graph(value):
             newlist1 = ast.literal_eval(sky)
             sky = newlist1[:]
             kivy = len(sky)
-            print(kivy)
             with open('sky1.txt') as json_file:
                 sky1 = json.load(json_file)
                 sky1=sky1[0]
             kivy2 = len(sky1)
-            print(kivy2)
             if kivy != kivy2:
                 trees=[]
                 trees.append(sky)
@@ -440,7 +438,6 @@ def update_graph(value):
             gb = "https://www.irishlottery.com/archive-"
             kz = gb + str(kx)
             url = kz
-            print(url)
             html = urlopen(url)
     
             soup = BeautifulSoup(html, 'lxml')
@@ -479,7 +476,6 @@ def update_graph(value):
                     i += 1
             for c in bz:
                 url = c
-                print(url)
                 html = urlopen(url)
         
                 soup = BeautifulSoup(html, 'lxml')
@@ -769,7 +765,6 @@ def make_graph4(intermediatevalue, value, slider, intermediatewater):
     fire=[]
     fire.append(roller)
     fire.append(percentball)
-    print(fire)
     return json.dumps(fire)
 
 @app.callback(Output('lotto3', 'figure'),
@@ -793,7 +788,6 @@ def make_graph2(intermediatevalue, value, radio, slider, intermediatewater):
         sky = json.loads(intermediatevalue)
         sky=sky[0]
     g = json.loads(intermediatewater)
-    print(g)
     sky2 = [val for sublist in sky for val in sublist] 
     ball1 = sky2[::7]
     ball1 = np.array(ball1)
@@ -865,22 +859,17 @@ def make_graph5(intermediatevalue2, intermediatevalue, value, slider, intermedia
     rain3 = json.loads(intermediatevalue)
     rain2 = rain3[1]
     rain=rain2[0]
-    print('rain', rain)
     earth = earth[::-1]
-    print(earth)
     earth4 = earth[:rain]
-    print(earth4)
     earth={}
     data=[]
     xlist = iter(range(1, 8))
     xlist = list(xlist)
-    print(xlist)
     if kx == bk3[22]:
         for idx, val in enumerate(earth4):
             earth[idx]=val
         for res in earth.values():
             data.append(dict(x= xlist, y=res, type='scatter', mode='lines + markers'))
-        print(data)
         figure={
             'data': data,
             'layout' : dict(
@@ -917,6 +906,7 @@ def make_graph5(intermediatevalue2, intermediatevalue, value, slider, intermedia
         layout = dict(
             paper_bgcolor= "#ffffff",
             plot_bgcolor= "rgb(208, 248, 255)",
+            showlegend =  False, 
             autosize=True,
             font=dict(
                 size=12,
@@ -944,7 +934,6 @@ def make_graph5(intermediatevalue2, intermediatevalue, value, slider, intermedia
             earth[idx]=val
         for res in earth.values():
             data.append(dict(x= xlist, y=res, type='scatter', mode='lines + markers'))
-        print(data)
         layout['title'] = "Initial Ball:" + str(value) + "| Year:" + str(kx),
         fig = dict(data=data, layout=layout)
         return fig
@@ -1027,12 +1016,13 @@ def make_graph6(intermediatevalue2, intermediatewater):
 
 
 @app.callback(Output('inter-ball', 'children'),
-              [Input('submit-button', 'n_clicks'),
-              Input('intermediate-value', 'children')],
-              [State('inter-ball', 'children')])
-def update_output(nclicks, intermediatevalue, interball):
-    nclicks = int(nclicks)
-    if nclicks > 0:
+              [Input('submit-button', 'n_clicks')],
+              [State('inter-ball', 'children'),
+              State('intermediate-value', 'children')])
+def update_output(nclicks, interball, intermediatevalue):
+    if int(nclicks) == 0:
+        return json.dumps('')
+    else:
         mist = json.loads(intermediatevalue)
         mist = mist[0]
         mist=mist[::-1]
@@ -1103,8 +1093,6 @@ def update_output(nclicks, intermediatevalue, interball):
             out[4] = 46
             out[5] = 47
         return json.dumps(out)
-    else:
-        return json.dumps('')
 
 
 @app.callback(Output('ball1', 'value'),
@@ -1123,8 +1111,9 @@ def update_output(interball):
               Input('intermediate-value2', 'children')],
               [State('inter-ball2', 'children')])
 def update_output(nclicks, intermediatevalue2, interball2):
-    nclicks = int(nclicks)
-    if nclicks > 0:
+    if int(nclicks) == 0:
+        return json.dumps('')
+    else:
         mist2 = json.loads(intermediatevalue2)
         mist = mist2[0]
         cage=mist[::-1]
@@ -1194,8 +1183,6 @@ def update_output(nclicks, intermediatevalue2, interball2):
             out[4] = 46
             out[5] = 47
         return json.dumps(out)
-    else:
-        return json.dumps('')
 
 
 @app.callback(Output('ball2', 'value'),
@@ -1253,8 +1240,9 @@ def make_graph5(intermediatevalue):
               [Input('submit-button3', 'n_clicks')],
               [State('inter-med1', 'children')])
 def update_output(nclicks, intermed1):
-    nclicks = int(nclicks)
-    if nclicks > 0:
+    if int(nclicks) == 0:
+        return json.dumps('')
+    else:
         with open('sky1.txt') as json_file:
             sky = json.load(json_file)
             sky = sky[0]
@@ -1487,8 +1475,7 @@ def update_output(nclicks, intermed1):
         
         ds2 = sum_agg()
         return json.dumps(ds2)
-    else:
-        return json.dumps('')
+
 
 @app.callback(Output('ball3', 'value'),
               [Input('inter-med1', 'children')])
