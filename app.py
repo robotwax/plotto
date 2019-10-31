@@ -60,9 +60,9 @@ class linked_list:
         while cur.next!=None:
             total+=1
             cur=cur.next
-        return total         
+        return total
 
-    # Returns the value of the node at 'index'. 
+    # Returns the value of the node at 'index'.
     def get(self,index):
         if index>=self.length() or index<0: # added 'index<0' post-video
             print("ERROR: 'Get' Index out of range!")
@@ -156,7 +156,7 @@ result_history = html.Div([
     html.Hr(),
     html.Br(),
     html.Div([
-        html.H3('Result History and Statistics', className="eleven columns offset-by-one"), 
+        html.H3('Result History and Statistics', className="eleven columns offset-by-one"),
     ], className = "row"),
     html.Div([
         html.Div(id='table-container', className= "five columns offset-by-one", style={'margin-top': 20}),
@@ -175,18 +175,18 @@ app.layout = html.Div([
     html.Div([
     dcc.Store(id='memory'),
     html.Br(),
-    html.H1('Predict Lotto Ireland', style={ 'font-size': 100,  'margin-top': 15}, 
+    html.H1('Predict Lotto Ireland', style={ 'font-size': 100,  'margin-top': 15},
       className = "nine columns"),
     html.Img( src="/assets/lotto.png", className = 'three columns', style={'width': '15%', 'float': 'right', 'margin-right': 5, 'z-index': 1, 'margin-top': -15}),
     ], className = "row"),
     html.Hr(),
     html.Div([
-        html.H3('Log In', className="six columns offset-by-one", style={'margin-top': 0}), 
+        html.H3('Log In', className="six columns offset-by-one", style={'margin-top': 0}),
         html.Div(id='custom-auth-frame', style={'float': 'right'}),
     ], className = "row"),
     html.Hr(),
     html.Div([
-        html.H3('Plotto Results Visualiser', className="eleven columns offset-by-one"), 
+        html.H3('Plotto Results Visualiser', className="eleven columns offset-by-one"),
     ], className = "row"),
     html.Div([
         html.P('This graph lets you see all of the Irish Lotto results from the year 1993 to present. Use the slider to select the range and then rotate the graph to gain different perspectives on the information. The earliest year of the slider below is used in calculating the graphs further down.', className="ten columns offset-by-one"),
@@ -210,13 +210,13 @@ app.layout = html.Div([
     html.Br(),
     html.Hr(),
     html.Div([
-        html.H3('Plotto Predict', className="eleven columns offset-by-one"), 
+        html.H3('Plotto Predict', className="eleven columns offset-by-one"),
     ], className = "row"),
     html.Div([
         html.P('This app helps to take the drudgery and indecision out of choosing lottery numbers and provides a statistically greater chance of winning than your average ‘quick pick’. Push the \'Predict\' button to increase your chances of winning the Lotto.', className="ten columns offset-by-one"),
     ], className = "row"),
     html.Br(),
-    html.Div([              
+    html.Div([
         dcc.Textarea(id='ball1', readOnly = True, rows=2, style={'width': '33.3333%',  'height': 50, 'padding-bottom': 6, 'border-radius': 1, 'resize': 'none',  'font-size': 30, 'font-family': 'inherit', 'text-align': 'center'},
         className="one column offset-by-four"),
     ], className="row"),
@@ -231,7 +231,7 @@ app.layout = html.Div([
     html.Div(id='interout', style={'display': 'none'}),
     html.Hr(),
     html.Div([
-        html.H3('Statistical Analysis', className="eleven columns offset-by-one"), 
+        html.H3('Statistical Analysis', className="eleven columns offset-by-one"),
     ], className = "row"),
     html.Div([
         html.P('These two graphs return statistics based off of results from both the upper and lower graphs. The graph on the right shows the distribution of results, for a single initial ball for that entire year. The same search determines the results of the graph on the left. This graph shows the percentages of numbers, for each of the six balls drawn in order. These are arranged on a per ball basis and are determined by the slider in the lower graph. So, if the slider in the lower graph is set to \'2\', the first ball will read \'100%\', because all of the first balls are \'2\'. Each of the other balls will display different numbers, which are the results that all share the first ball in common.', className="ten columns offset-by-one"),
@@ -256,7 +256,7 @@ app.layout = html.Div([
     ], className="row"),
     html.Hr(),
     html.Div([
-        html.H3('Lowest Base Result', className="eleven columns offset-by-one"), 
+        html.H3('Lowest Base Result', className="eleven columns offset-by-one"),
     ], className = "row"),
     html.Div([
         html.P('The slider on this graph allows you to determine the lowest number result of the Lottery result. If the slider is set to \'1\', all of the lottery results that have \'1\' as their lowest number will be displayed.', className="ten columns offset-by-one"),
@@ -285,13 +285,13 @@ app.layout = html.Div([
     html.Br(),
     html.Hr(),
     html.Div([
-        html.H3('Plotto Lowest Result Predict', className="eleven columns offset-by-one"), 
+        html.H3('Plotto Lowest Result Predict', className="eleven columns offset-by-one"),
     ], className = "row"),
     html.Div([
         html.P('Push the \'Predict\' button to calculate based on the lowest order result.', className="ten columns offset-by-one"),
     ], className = "row"),
     html.Br(),
-    html.Div([              
+    html.Div([
         dcc.Textarea(id='ball2', readOnly = True, rows=2, style={'width': '33.3333%',  'height': 50, 'padding-bottom': 6, 'border-radius': 1, 'resize': 'none',  'font-size': 30, 'font-family': 'inherit', 'text-align': 'center'},
         className="one column offset-by-four"),
     ], className="row"),
@@ -301,7 +301,7 @@ app.layout = html.Div([
     ], className="row"),
     html.Hr(),
     html.Div([
-        html.H3('Stochastic Analysis', className="eleven columns offset-by-one"), 
+        html.H3('Stochastic Analysis', className="eleven columns offset-by-one"),
     ], className = "row"),
     html.Div([
         html.P('This aspect of Predict Lotto attempts to do the impossible i.e. use Machine Learning to predict random numbers.', className="ten columns offset-by-one"),
@@ -312,13 +312,13 @@ app.layout = html.Div([
         dcc.Graph(id='lotto5', style={'height': '60vh'}, className="ten columns offset-by-one")),
     ], className='row'),
     html.Div([
-        html.H3('Stochastic Predict', className="eleven columns offset-by-one"), 
+        html.H3('Stochastic Predict', className="eleven columns offset-by-one"),
     ], className = "row"),
     html.Div([
         html.P('This function uses Machine Learning methods to predict the range of numbers that the next draw will appear in. This section is still under development.', className="ten columns offset-by-one"),
     ], className = "row"),
     html.Br(),
-    html.Div([              
+    html.Div([
         dcc.Textarea(id='ball3', readOnly = True, rows=2, style={'width': '33.3333%',  'height': 50, 'padding-bottom': 6, 'border-radius': 1, 'resize': 'none',  'font-size': 30, 'font-family': 'inherit', 'text-align': 'center'},
         className="one column offset-by-four"),
     ], className="row"),
@@ -388,11 +388,11 @@ def update_graph(value):
             for c in bz:
                 url = c
                 html = urlopen(url)
-            
+
                 soup = BeautifulSoup(html, 'lxml')
-            
+
                 # Get the title
-                table = soup.findAll('table')[0] 
+                table = soup.findAll('table')[0]
                 df = pd.read_html(str(table))
                 df= (df[0].to_json(orient='split'))
                 df = pd.read_json(df, orient='split')
@@ -417,36 +417,23 @@ def update_graph(value):
             sky = sky.replace("]\'", "]")
             newlist1 = ast.literal_eval(sky)
             sky = newlist1[:]
-            kivy = len(sky)
-            with open('sky1.txt') as json_file:
-                sky1 = json.load(json_file)
-                sky1=sky1[0]
-            kivy2 = len(sky1)
-            if kivy != kivy2:
-                trees=[]
-                trees.append(sky)
-                trees.append(gg)
-                with open('sky1.txt', 'w') as outfile:
-                    json.dump(trees, outfile)
-                return json.dumps(sky)
-            else:
-                dry=[]
-                dry.append(sky)
-                dry.append(gg)
-                return json.dumps(dry) 
+            dry=[]
+            dry.append(sky)
+            dry.append(gg)
+            return json.dumps(dry)
         elif kx == ky:
             gb = "https://www.irishlottery.com/archive-"
             kz = gb + str(kx)
             url = kz
             html = urlopen(url)
-    
+
             soup = BeautifulSoup(html, 'lxml')
-    
+
             # Get the title
-            table = soup.findAll('table')[0] 
+            table = soup.findAll('table')[0]
             df = pd.read_html(str(table))
             df= (df[0].to_json(orient='split'))
-    
+
             df = pd.read_json(df, orient='split')
             lendf = len(df)
             gg.append(lendf)
@@ -477,11 +464,11 @@ def update_graph(value):
             for c in bz:
                 url = c
                 html = urlopen(url)
-        
+
                 soup = BeautifulSoup(html, 'lxml')
-        
+
                 # Get the title
-                table = soup.findAll('table')[0] 
+                table = soup.findAll('table')[0]
                 df = pd.read_html(str(table))
                 df= (df[0].to_json(orient='split'))
                 df = pd.read_json(df, orient='split')
@@ -557,7 +544,7 @@ def make_graph1(intermediatevalue, slider):
             df.append(47)
     topg = (max(df))
     return json.dumps(topg)
-    
+
 @app.callback(Output('lotto', 'figure'),
     [Input('intermediate-value', 'children'),
     Input('intermediate-water', 'children'),
@@ -568,144 +555,74 @@ def make_graph3(intermediatevalue, intermediatewater, value):
     bk3=bk4[0]
     kx = value[0]
     ky = value[1]
-    if kx == bk3[22] and ky == bk3[-1]:
-        with open('sky1.txt', 'r') as json_file:
-            sky1 = json.load(json_file)
-            sky1=sky1[0]
-        sky1 = sky1[::-1]
-        trace1 = dict(
-            type="surface",
-            z=sky1,
-            hoverinfo='z',
-            lighting={
-                "ambient": 0.80,
-                "diffuse": 0.80,
-                "fresnel": 4,
-                "roughness": 50,
-                "specular": 3,
+    sky = json.loads(intermediatevalue)
+    sky=sky[0]
+    topg = json.loads(intermediatewater)
+    sky = sky[::-1]
+    trace1 = dict(
+        type="surface",
+        z=sky,
+        hoverinfo='z',
+        lighting={
+            "ambient": 0.80,
+            "diffuse": 0.80,
+            "fresnel": 4,
+            "roughness": 50,
+            "specular": 3,
+        },
+        autocolorscale= False,
+        cauto= False,
+        cmax= topg,
+        colorscale= [
+            [0, "#313131"], [0.0625, "#3d019d"], [0.125, "#3810dc"], [0.1875, "#2d47f9"], [0.25, "#2593ff"], [0.3125, "#2adef6"], [0.375, "#60fdfa"], [0.4375, "#aefdff"], [0.5, "#f3f3f1"], [0.5625, "#fffda9"], [0.625, "#fafd5b"], [0.6875, "#f7da29"], [0.75, "#ff8e25"], [0.8125, "#f8432d"], [0.875, "#d90d39"], [0.9375, "#97023d"], [1, "#313131"]],
+        showscale=True,
+        scene="scene",
+        colorbar= {
+            "x": 1.1,
+            "y": 0.43999999999999995,
+            "lenmode": "fraction",
+            "thickness": 31,
+            "thicknessmode": "pixels",
+            "xanchor": "right"
+          },
+    )
+    data = [trace1]
+    layout = dict(
+        autosize=True,
+        font=dict(
+            size=12,
+            color="#CCCCCC",
+        ),
+        margin=dict(
+            t=5,
+            l=50,
+            b=50,
+            r=5,
+        ),
+        hovermode='closest',
+        scene=dict(
+            aspectmode="manual",
+            aspectratio=dict(x=2, y=5, z=1.5),
+            camera=dict(eye=dict(x=-3.4, y=0, z=0)), center=dict(x=0, y=0, z=0), up=dict(x=0, y=0, z=1)),
+            xaxis={
+                "showgrid": True,
+                "title": "",
+                "type": "category",
+                "zeroline": False,
+                "categoryorder": 'array',
+                "categoryarray": list(reversed(bk3))
             },
-            autocolorscale= False, 
-            cauto= False, 
-            cmax= 47, 
-            colorscale= [
-                [0, "#313131"], [0.0625, "#3d019d"], [0.125, "#3810dc"], [0.1875, "#2d47f9"], [0.25, "#2593ff"], [0.3125, "#2adef6"], [0.375, "#60fdfa"], [0.4375, "#aefdff"], [0.5, "#f3f3f1"], [0.5625, "#fffda9"], [0.625, "#fafd5b"], [0.6875, "#f7da29"], [0.75, "#ff8e25"], [0.8125, "#f8432d"], [0.875, "#d90d39"], [0.9375, "#97023d"], [1, "#313131"]], 
-            showscale=True,
-            scene="scene",
-            colorbar= {
-                "x": 1.1, 
-                "y": 0.43999999999999995, 
-                "lenmode": "fraction", 
-                "thickness": 31, 
-                "thicknessmode": "pixels", 
-                "xanchor": "right"
-              }, 
-        )
-        data = [trace1]
-        layout = dict(
-            autosize=True,
-            font=dict(
-                size=12,
-                color="#CCCCCC",
-            ),
-            margin=dict(
-                t=5,
-                l=50,
-                b=50,
-                r=5,
-            ),
-            hovermode='closest',
-            scene=dict(
-                aspectmode="manual",
-                aspectratio=dict(x=2, y=5, z=1.5),
-                camera=dict(eye=dict(x=-3.4, y=0, z=0)), center=dict(x=0, y=0, z=0), up=dict(x=0, y=0, z=1)),
-                xaxis={
-                    "showgrid": True,
-                    "title": "",
-                    "type": "category",
-                    "zeroline": False,
-                    "categoryorder": 'array',
-                    "categoryarray": list(reversed(bk3))
-                },
-                yaxis={
-                    "showgrid": True,
-                    "title": "",
-                    "type": "date",
-                    "zeroline": False,
-                },
-            )
-        
-        figure = dict(data=data, layout=layout)
-        # py.iplot(figure)
-        return figure
-    else:
-        sky = json.loads(intermediatevalue)
-        sky=sky[0]
-        topg = json.loads(intermediatewater)
-        sky = sky[::-1]
-        trace1 = dict(
-            type="surface",
-            z=sky,
-            hoverinfo='z',
-            lighting={
-                "ambient": 0.80,
-                "diffuse": 0.80,
-                "fresnel": 4,
-                "roughness": 50,
-                "specular": 3,
+            yaxis={
+                "showgrid": True,
+                "title": "",
+                "type": "date",
+                "zeroline": False,
             },
-            autocolorscale= False, 
-            cauto= False, 
-            cmax= topg, 
-            colorscale= [
-                [0, "#313131"], [0.0625, "#3d019d"], [0.125, "#3810dc"], [0.1875, "#2d47f9"], [0.25, "#2593ff"], [0.3125, "#2adef6"], [0.375, "#60fdfa"], [0.4375, "#aefdff"], [0.5, "#f3f3f1"], [0.5625, "#fffda9"], [0.625, "#fafd5b"], [0.6875, "#f7da29"], [0.75, "#ff8e25"], [0.8125, "#f8432d"], [0.875, "#d90d39"], [0.9375, "#97023d"], [1, "#313131"]], 
-            showscale=True,
-            scene="scene",
-            colorbar= {
-                "x": 1.1, 
-                "y": 0.43999999999999995, 
-                "lenmode": "fraction", 
-                "thickness": 31, 
-                "thicknessmode": "pixels", 
-                "xanchor": "right"
-              }, 
         )
-        data = [trace1]
-        layout = dict(
-            autosize=True,
-            font=dict(
-                size=12,
-                color="#CCCCCC",
-            ),
-            margin=dict(
-                t=5,
-                l=50,
-                b=50,
-                r=5,
-            ),
-            hovermode='closest',
-            scene=dict(
-                aspectmode="manual",
-                aspectratio=dict(x=2, y=5, z=1.5),
-                camera=dict(eye=dict(x=-3.4, y=0, z=0)), center=dict(x=0, y=0, z=0), up=dict(x=0, y=0, z=1)),
-                xaxis={
-                    "showgrid": True,
-                    "title": "",
-                    "type": "category",
-                    "zeroline": False,
-                    "categoryorder": 'array',
-                    "categoryarray": list(reversed(bk3))
-                },
-                yaxis={
-                    "showgrid": True,
-                    "title": "",
-                    "type": "date",
-                    "zeroline": False,
-                },
-            )
-        
-        figure = dict(data=data, layout=layout)
-        # py.iplot(figure)
-        return figure
+
+    figure = dict(data=data, layout=layout)
+    # py.iplot(figure)
+    return figure
 
 @app.callback(Output('intermediate-value2', 'children'),
     [Input('intermediate-value', 'children'),
@@ -713,20 +630,12 @@ def make_graph3(intermediatevalue, intermediatewater, value):
     Input('slider', 'value'),
     Input('intermediate-water', 'children')])
 def make_graph4(intermediatevalue, value, slider, intermediatewater):
-    bk3=yearlist()
-    bk4=(list(bk3))
-    bk3=bk4[0]
     kx = slider[0]
     ky = slider[1]
-    if  kx == bk3[22] and ky == bk3[-1]:
-        with open('sky1.txt', 'r') as json_file:
-            sky = json.load(json_file)
-            sky=sky[0]
-    else:
-        sky = json.loads(intermediatevalue)
-        sky= sky[0]
+    sky = json.loads(intermediatevalue)
+    sky= sky[0]
     g = json.loads(intermediatewater)
-    sky2 = [val for sublist in sky for val in sublist] 
+    sky2 = [val for sublist in sky for val in sublist]
     ball1 = sky2[::7]
     ball1 = np.array(ball1)
     balls=[]
@@ -774,21 +683,12 @@ def make_graph4(intermediatevalue, value, slider, intermediatewater):
     Input('slider', 'value'),
     Input('intermediate-water', 'children')])
 def make_graph2(intermediatevalue, value, radio, slider, intermediatewater):
-    bk3=yearlist()
-    bk3=yearlist()
-    bk4=(list(bk3))
-    bk3=bk4[0]
     kx = slider[0]
     ky = slider[1]
-    if kx == bk3[22] and ky == bk3[-1]:
-        with open('sky1.txt') as json_file:
-            sky = json.load(json_file)
-            sky = sky[0]
-    else:
-        sky = json.loads(intermediatevalue)
-        sky=sky[0]
+    sky = json.loads(intermediatevalue)
+    sky=sky[0]
     g = json.loads(intermediatewater)
-    sky2 = [val for sublist in sky for val in sublist] 
+    sky2 = [val for sublist in sky for val in sublist]
     ball1 = sky2[::7]
     ball1 = np.array(ball1)
     balls=[]
@@ -875,7 +775,7 @@ def make_graph5(intermediatevalue2, intermediatevalue, value, slider, intermedia
             'layout' : dict(
                 title = "Initial Ball:" + str(value) + "| Year: 2015",
                 paper_bgcolor= "#ffffff",
-                showlegend =  False, 
+                showlegend =  False,
                 plot_bgcolor= "rgb(208, 248, 255)",
                 autosize=True,
                 font=dict(
@@ -906,7 +806,7 @@ def make_graph5(intermediatevalue2, intermediatevalue, value, slider, intermedia
         layout = dict(
             paper_bgcolor= "#ffffff",
             plot_bgcolor= "rgb(208, 248, 255)",
-            showlegend =  False, 
+            showlegend =  False,
             autosize=True,
             font=dict(
                 size=12,
@@ -960,22 +860,22 @@ def make_graph6(intermediatevalue2, intermediatewater):
             "roughness": 50,
             "specular": 3,
         },
-        autocolorscale= False, 
-        cauto= False, 
-        cmax= cf, 
+        autocolorscale= False,
+        cauto= False,
+        cmax= cf,
         colorscale= [
-            [0, "#440154"], [0.1111111111111111, "#482878"], [0.2222222222222222, "#3e4989"], [0.3333333333333333, "#31688e"], [0.4444444444444444, "#26828e"], [0.5555555555555556, "#1f9e89"], [0.6666666666666666, "#35b779"], [0.7777777777777778, "#6ece58"], [0.8888888888888888, "#b5de2b"], [1, "#fde725"]], 
+            [0, "#440154"], [0.1111111111111111, "#482878"], [0.2222222222222222, "#3e4989"], [0.3333333333333333, "#31688e"], [0.4444444444444444, "#26828e"], [0.5555555555555556, "#1f9e89"], [0.6666666666666666, "#35b779"], [0.7777777777777778, "#6ece58"], [0.8888888888888888, "#b5de2b"], [1, "#fde725"]],
 
         showscale=True,
         scene="scene",
         colorbar= {
-            "x": 1.1, 
-            "y": 0.43999999999999995, 
-            "lenmode": "fraction", 
-            "thickness": 31, 
-            "thicknessmode": "pixels", 
+            "x": 1.1,
+            "y": 0.43999999999999995,
+            "lenmode": "fraction",
+            "thickness": 31,
+            "thicknessmode": "pixels",
             "xanchor": "right"
-          }, 
+          },
     )
     data = [trace1]
     layout = dict(
@@ -1009,7 +909,7 @@ def make_graph6(intermediatevalue2, intermediatewater):
                 "zeroline": False,
             },
         )
-    
+
     figure = dict(data=data, layout=layout)
     # py.iplot(figure)
     return figure
@@ -1037,20 +937,20 @@ def update_output(nclicks, interball, intermediatevalue):
         ball1=ball[k]
         out = []
         out.append(ball1)
-    
+
         ball =  balls[4]
         ball = [m for m in ball if m != ball1]
         k = random.randint(0, 6)
         ball2=ball[k]
         out.append(ball2)
-    
+
         ball =  balls[3]
         jc = [m for m in ball if m != ball1]
         ball = [m for m in jc if m != ball2]
         k = random.randint(0, 6)
         ball3=ball[k]
         out.append(ball3)
-    
+
         ball =  balls[2]
         jc = [m for m in ball if m != ball1]
         jd = [m for m in jc if m != ball2]
@@ -1058,7 +958,7 @@ def update_output(nclicks, interball, intermediatevalue):
         k = random.randint(0, 6)
         ball4=ball[k]
         out.append(ball4)
-    
+
         ball =  balls[1]
         jc = [m for m in ball if m != ball1]
         jd = [m for m in jc if m != ball2]
@@ -1067,7 +967,7 @@ def update_output(nclicks, interball, intermediatevalue):
         k = random.randint(0, 6)
         ball5=ball[k]
         out.append(ball5)
-    
+
         ball =  balls[0]
         jc = [m for m in ball if m != ball1]
         jd = [m for m in jc if m != ball2]
@@ -1114,128 +1014,133 @@ def update_output(nclicks, intermediatevalue2, interball2):
     if int(nclicks) == 0:
         return json.dumps('')
     else:
-        mist2 = json.loads(intermediatevalue2)
-        mist = mist2[0]
-        cage=mist[::-1]
-        cage2 = [val for sublist in cage for val in sublist]
-        balls = []
-        for i in range(0, 8):
-            ball = cage2[i::7]
-            balls.append(ball)
-        ball =  balls[5]
-        k = random.randint(0, 6)
-        ball1=ball[k]
-        out = []
-        out.append(ball1)
+        try:
+            mist2 = json.loads(intermediatevalue2)
+            mist = mist2[0]
+            cage=mist[::-1]
+            cage2 = [val for sublist in cage for val in sublist]
+            balls = []
+            for i in range(0, 8):
+                ball = cage2[i::7]
+                balls.append(ball)
+            ball =  balls[5]
+            k = random.randint(0, 6)
+            ball1=ball[k]
+            out = []
+            out.append(ball1)
     
-        ball =  balls[4]
-        ball = [m for m in ball if m != ball1]
-        k = random.randint(0, 6)
-        ball2=ball[k]
-        out.append(ball2)
+            ball =  balls[4]
+            ball = [m for m in ball if m != ball1]
+            k = random.randint(0, 6)
+            ball2=ball[k]
+            out.append(ball2)
     
-        ball =  balls[3]
-        jc = [m for m in ball if m != ball1]
-        ball = [m for m in jc if m != ball2]
-        k = random.randint(0, 6)
-        ball3=ball[k]
-        out.append(ball3)
+            ball =  balls[3]
+            jc = [m for m in ball if m != ball1]
+            ball = [m for m in jc if m != ball2]
+            k = random.randint(0, 6)
+            ball3=ball[k]
+            out.append(ball3)
     
-        ball =  balls[2]
-        jc = [m for m in ball if m != ball1]
-        jd = [m for m in jc if m != ball2]
-        ball = [m for m in jd if m != ball3]
-        k = random.randint(0, 6)
-        ball4=ball[k]
-        out.append(ball4)
+            ball =  balls[2]
+            jc = [m for m in ball if m != ball1]
+            jd = [m for m in jc if m != ball2]
+            ball = [m for m in jd if m != ball3]
+            k = random.randint(0, 6)
+            ball4=ball[k]
+            out.append(ball4)
     
-        ball =  balls[1]
-        jc = [m for m in ball if m != ball1]
-        jd = [m for m in jc if m != ball2]
-        je = [m for m in jd if m != ball3]
-        ball = [m for m in je if m != ball4]
-        k = random.randint(0, 6)
-        ball5=ball[k]
-        out.append(ball5)
+            ball =  balls[1]
+            jc = [m for m in ball if m != ball1]
+            jd = [m for m in jc if m != ball2]
+            je = [m for m in jd if m != ball3]
+            ball = [m for m in je if m != ball4]
+            k = random.randint(0, 6)
+            ball5=ball[k]
+            out.append(ball5)
     
-        ball =  balls[0]
-        jc = [m for m in ball if m != ball1]
-        jd = [m for m in jc if m != ball2]
-        je = [m for m in jd if m != ball3]
-        jf = [m for m in je if m != ball4]
-        ball = [m for m in jf if m != ball5]
-        k = random.randint(0, 6)
-        ball6=ball[k]
-        out.append(ball6)
-        out = sorted(out)
-        if out[4] == 46:
-            out[5] = 47
-        elif out[3] == 45:
-            out[4] = 46
-            out[5] = 47
-        elif out[2] == 44:
-            out[3] = 45
-            out[4] = 46
-            out[5] = 47
-        elif out[1] == 43:
-            out[2] = 44
-            out[3] = 45
-            out[4] = 46
-            out[5] = 47
-        return json.dumps(out)
+            ball =  balls[0]
+            jc = [m for m in ball if m != ball1]
+            jd = [m for m in jc if m != ball2]
+            je = [m for m in jd if m != ball3]
+            jf = [m for m in je if m != ball4]
+            ball = [m for m in jf if m != ball5]
+            k = random.randint(0, 6)
+            ball6=ball[k]
+            out.append(ball6)
+            out = sorted(out)
+            if out[4] == 46:
+                out[5] = 47
+            elif out[3] == 45:
+                out[4] = 46
+                out[5] = 47
+            elif out[2] == 44:
+                out[3] = 45
+                out[4] = 46
+                out[5] = 47
+            elif out[1] == 43:
+                out[2] = 44
+                out[3] = 45
+                out[4] = 46
+                out[5] = 47
+            return json.dumps(out)
+        except:
+            pass
 
 
 @app.callback(Output('ball2', 'value'),
               [Input('inter-ball2', 'children')])
 def update_output(interball2):
-    out = json.loads(interball2)
-    clean=str(out)
-    clean = clean.replace(',', '  ')
-    clean = clean.replace('[', '')
-    clean = clean.replace(']', '')
-    return clean
+    try:
+        out = json.loads(interball2)
+        clean=str(out)
+        clean = clean.replace(',', '  ')
+        clean = clean.replace('[', '')
+        clean = clean.replace(']', '')
+        return clean
+    except:
+        pass
 
 
 
 @app.callback(Output('lotto5', 'figure'),
     [Input('intermediate-value', 'children')])
 def make_graph5(intermediatevalue):
-    with open('sky1.txt') as json_file:
-        sky = json.load(json_file)
-        sky = sky[0]
+    sky = json.loads(intermediatevalue)
+    sky= sky[0]
     sky = sky[-37:-1]
     c = []
     for i in sky:
         g = sum(i)
-        c.append(g) 
+        c.append(g)
     data = go.Scatter(
       y = c,
       marker= dict(
-        color = "rgb(178, 10, 28)", 
+        color = "rgb(178, 10, 28)",
         symbol = "square"
-      ), 
+      ),
     ),
     layout = dict(
-      autosize = True, 
-      plot_bgcolor = "rgb(255, 251, 198)", 
-      showlegend =  False, 
-      title = "Stochastic Analysis", 
+      autosize = True,
+      plot_bgcolor = "rgb(255, 251, 198)",
+      showlegend =  False,
+      title = "Stochastic Analysis",
       xaxis= {
-        "autorange": True, 
-        "range": [-1.7517458100558658, 30.751745810055866], 
+        "autorange": True,
+        "range": [-1.7517458100558658, 30.751745810055866],
         "title": {"text": "time"}
-      }, 
+      },
       yaxis= {
-        "autorange": True, 
-        "range": [108.03752039151712, 259.96247960848285], 
-        "title": {"text": "aggregated results"}, 
+        "autorange": True,
+        "range": [108.03752039151712, 259.96247960848285],
+        "title": {"text": "aggregated results"},
         "type": "linear"
       }
     )
     figure = dict(data=data, layout=layout)
     # py.iplot(figure)
     return figure
-    
+
 @app.callback(Output('inter-med1', 'children'),
               [Input('submit-button3', 'n_clicks')],
               [State('inter-med1', 'children')])
@@ -1250,12 +1155,12 @@ def update_output(nclicks, intermed1):
         c = []
         for i in y:
             g = sum(i)
-            c.append(g)      
-        ko = max(i for i in c)    
-        p = min(i for i in c)    
-        q = len(c)    
+            c.append(g)
+        ko = max(i for i in c)
+        p = min(i for i in c)
+        q = len(c)
         o = sum(c)
-        f = o//q    
+        f = o//q
         gg = ko-p
         fg = gg//3
         gh = p+fg
@@ -1271,8 +1176,8 @@ def update_output(nclicks, intermed1):
         x1 = np.array(kl).reshape(7, 5)
         x2 = np.array(kl).reshape(5, 7)
         kl.append(2)
-        x3 = np.array(kl).reshape(6, 6)    
-        x5 = np.arange(3,52).reshape(7, 7)    
+        x3 = np.array(kl).reshape(6, 6)
+        x5 = np.arange(3,52).reshape(7, 7)
         x5[0,2]= x3[0,2]
         x5[0,3]= x3[0,3]
         x5[0,4]= x1[0,4]
@@ -1393,14 +1298,14 @@ def update_output(nclicks, intermed1):
         x5[6,2] = x5[0,2]
         x5[6,3] = x5[0,3]
         x5[6,5] = x5[0,5]
-        
+
         gh3 = x5.tolist()
-        gh1 = [val for sublist in gh3 for val in sublist] 
+        gh1 = [val for sublist in gh3 for val in sublist]
         gh2 = gh1[-9:]
-        gh4 = gh2[1]        
-        
-        cage2 = [val for sublist in y for val in sublist] 
-        
+        gh4 = gh2[1]
+
+        cage2 = [val for sublist in y for val in sublist]
+
         def calrange():
             balls = []
             for i in range(0, 8):
@@ -1411,20 +1316,20 @@ def update_output(nclicks, intermed1):
             ball1=ball[k]
             out = []
             out.append(ball1)
-        
+
             ball =  balls[4]
             ball = [m for m in ball if m != ball1]
             k = random.randint(0, 6)
             ball2=ball[k]
             out.append(ball2)
-        
+
             ball =  balls[3]
             jc = [m for m in ball if m != ball1]
             ball = [m for m in jc if m != ball2]
             k = random.randint(0, 6)
             ball3=ball[k]
             out.append(ball3)
-        
+
             ball =  balls[2]
             jc = [m for m in ball if m != ball1]
             jd = [m for m in jc if m != ball2]
@@ -1432,7 +1337,7 @@ def update_output(nclicks, intermed1):
             k = random.randint(0, 6)
             ball4=ball[k]
             out.append(ball4)
-        
+
             ball =  balls[1]
             jc = [m for m in ball if m != ball1]
             jd = [m for m in jc if m != ball2]
@@ -1441,7 +1346,7 @@ def update_output(nclicks, intermed1):
             k = random.randint(0, 6)
             ball5=ball[k]
             out.append(ball5)
-        
+
             ball =  balls[0]
             jc = [m for m in ball if m != ball1]
             jd = [m for m in jc if m != ball2]
@@ -1455,9 +1360,9 @@ def update_output(nclicks, intermed1):
             return(out)
 
         ds1 = calrange()
-        
+
         geg=[]
-        
+
         def sum_agg():
             ds1 = calrange()
             dsf = sum(ds1)
@@ -1472,7 +1377,7 @@ def update_output(nclicks, intermed1):
             else:
                 ds = sum_agg()
                 return ds
-        
+
         ds2 = sum_agg()
         return json.dumps(ds2)
 
